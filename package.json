@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@cucumber/cucumber": "^11.0.1",
+    "@percy/cli": "^1.29.3",
+    "@percy/playwright": "^1.0.6",
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.5.4",
+    "allure-cucumberjs": "^3.0.1",
+    "allure-playwright": "^3.0.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "test": "cucumber-js",
+    "test:chrome": "BROWSER=chromium cucumber-js",
+    "test:firefox": "BROWSER=firefox cucumber-js",
+    "test:safari": "BROWSER=webkit cucumber-js",
+    "test:mobile-chrome": "BROWSER=chromium DEVICE='Pixel 5' cucumber-js",
+    "test:mobile-safari": "BROWSER=webkit DEVICE='iPhone 12' cucumber-js",
+    "test:all": "npm run test:chrome && npm run test:firefox && npm run test:safari && npm run test:mobile-chrome && npm run test:mobile-safari",
+    "test:playwright": "playwright test"
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "percy":{
+      "token":"web_7b227852a275842d7ec3351b11cbcc8567f09ec1c6c36938b7c12e3eb8146800"
+    },
+    "snapshot": {
+      "widths": [
+        375,
+        1280
+      ],
+      "minHeight": 1024,
+      "percyCSS": "",
+      "enableJavaScript": false,
+      "cliEnableJavaScript": true,
+      "disableShadowDOM": false
+    },
+    "discovery": {
+      "allowedHostnames": [],
+      "disallowedHostnames": [],
+      "networkIdleTimeout": 100,
+      "captureMockedServiceWorker": false
+    },
+    "upload": {
+      "files": "**/*.{png,jpg,jpeg}",
+      "ignore": "",
+      "stripExtensions": false
+    }
+  }
+  
