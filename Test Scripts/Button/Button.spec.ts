@@ -8,6 +8,7 @@ import { ButtonsPage } from './ButtonPage';
 import { Actions } from '../../Utils/Actions';
 import buttonTestData from '../../Data/button.data.json';
 import { CustomWorld } from '../../Utils/World';
+import percySnapshot from '@percy/playwright';
 
 let buttonsPage: ButtonsPage;
 let actions: Actions;
@@ -43,6 +44,11 @@ Then('the secondary button should be displayed', async function(this: CustomWorl
   await expect(buttonsPage.secondaryButton).toBeVisible({ timeout: 10000 });
 });
 
+Then('a visual snapshot is taken for comparison', async function(this: CustomWorld) {
+  console.log('Taking Percy snapshot');
+  await percySnapshot(this.page, 'All Variants Button Page');
+  console.log('Percy snapshot taken');
+});
 //Then('a visual snapshot is taken for comparison', async function(this: CustomWorld) {
  // await this.percySnapshot('All Variants Button Page');
 //});

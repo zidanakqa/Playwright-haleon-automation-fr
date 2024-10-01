@@ -4,6 +4,8 @@ Feature: Button Component
     Given the user navigates to the all variants page
     Then the primary button should be displayed
     And the secondary button should be displayed
+      And a visual snapshot is taken for comparison
+
 
   #Scenario: Verify special variant button
     #Given the user navigates to the special variant page

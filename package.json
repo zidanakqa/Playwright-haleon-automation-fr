@@ -17,13 +17,16 @@
   },
  "scripts": {
     "test": "cucumber-js",
-    "test:chrome": "cross-env BROWSER=chromium npm run test",
-    "test:firefox": "cross-env BROWSER=firefox npm run test",
-    "test:safari": "cross-env BROWSER=webkit npm run test",
-    "test:mobile-chrome": "cross-env BROWSER=mobile-chrome npm run test",
-    "test:mobile-safari": "cross-env BROWSER=mobile-safari npm run test",
+    "test:chrome": "BROWSER=chromium npm run test",
+    "test:firefox": "BROWSER=firefox npm run test",
+    "test:safari": "BROWSER=webkit npm run test",
+    "test:mobile-chrome": "BROWSER=mobile-chrome npm run test",
+    "test:mobile-safari": "BROWSER=mobile-safari npm run test",
     "test:all": "npm run test:chrome && npm run test:firefox && npm run test:safari && npm run test:mobile-chrome && npm run test:mobile-safari",
+    "report:allure": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "report:html": "open cucumber-report.html",
     "test:all-parallel": "npm-run-all --parallel test:chrome test:firefox test:safari test:mobile-chrome test:mobile-safari",
-    "report:html": "open cucumber-report.html"
+    "report:playwright": "npx playwright show-report"
+    
   }
 }
