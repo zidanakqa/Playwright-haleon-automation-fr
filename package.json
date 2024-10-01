@@ -6,20 +6,24 @@
     "@percy/playwright": "^1.0.6",
     "@playwright/test": "^1.47.2",
     "@types/node": "^22.5.4",
-    "allure-cucumberjs": "^3.0.1",
+    "allure-commandline": "^2.30.0",
+    "allure-cucumberjs": "^3.0.3",
     "allure-playwright": "^3.0.1",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.2"
   },
-  "scripts": {
+ "scripts": {
     "test": "cucumber-js",
-    "test:chrome": "BROWSER=chromium cucumber-js",
-    "test:firefox": "BROWSER=firefox cucumber-js",
-    "test:safari": "BROWSER=webkit cucumber-js",
-    "test:mobile-chrome": "BROWSER=chromium DEVICE='Pixel 5' cucumber-js",
-    "test:mobile-safari": "BROWSER=webkit DEVICE='iPhone 12' cucumber-js",
+    "test:chrome": "cross-env BROWSER=chromium npm run test",
+    "test:firefox": "cross-env BROWSER=firefox npm run test",
+    "test:safari": "cross-env BROWSER=webkit npm run test",
+    "test:mobile-chrome": "cross-env BROWSER=mobile-chrome npm run test",
+    "test:mobile-safari": "cross-env BROWSER=mobile-safari npm run test",
     "test:all": "npm run test:chrome && npm run test:firefox && npm run test:safari && npm run test:mobile-chrome && npm run test:mobile-safari",
-    "test:playwright": "playwright test"
+    "test:all-parallel": "npm-run-all --parallel test:chrome test:firefox test:safari test:mobile-chrome test:mobile-safari",
+    "report:html": "open cucumber-report.html"
   }
 }

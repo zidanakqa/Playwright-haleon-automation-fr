@@ -2,7 +2,136 @@
 //npx percy exec -- cucumber-js
 //TEST_ENV=desktop npx cucumber-js
 //TEST_ENV=desktop cucumber-js
-import { Given, Then } from '@cucumber/cucumber';
+import { Given, Then, Before, After } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
+import { ButtonsPage } from './ButtonPage';
+import { Actions } from '../../Utils/Actions';
+import buttonTestData from '../../Data/button.data.json';
+import { CustomWorld } from '../../Utils/World';
+
+let buttonsPage: ButtonsPage;
+let actions: Actions;
+
+Before(async function(this: CustomWorld) {
+  await this.init();
+  buttonsPage = new ButtonsPage(this.page);
+  actions = new Actions(this.page);
+});
+
+After(async function(this: CustomWorld) {
+  await this.close();
+});
+
+Given('the user navigates to the all variants page', { timeout: 30000 }, async function(this: CustomWorld) {
+  console.log(`Navigating to: ${buttonTestData.allVariantsUrl}`);
+  await this.page.goto(buttonTestData.allVariantsUrl, { waitUntil: 'networkidle' });
+  console.log('Navigation complete');
+
+  console.log('Waiting for button to be visible');
+  await this.page.waitForSelector('button.d-button', { state: 'visible', timeout: 20000 });
+  console.log('Button is visible');
+
+  await this.page.waitForTimeout(2000);
+  console.log('Additional wait complete');
+});
+
+Then('the primary button should be displayed', async function(this: CustomWorld) {
+  await expect(buttonsPage.primaryButton).toBeVisible({ timeout: 10000 });
+});
+
+Then('the secondary button should be displayed', async function(this: CustomWorld) {
+  await expect(buttonsPage.secondaryButton).toBeVisible({ timeout: 10000 });
+});
+
+//Then('a visual snapshot is taken for comparison', async function(this: CustomWorld) {
+ // await this.percySnapshot('All Variants Button Page');
+//});
+/*import { Given, Then, Before, After } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
+import { ButtonsPage } from './ButtonPage';
+import { Actions } from '../../Utils/Actions';
+import buttonTestData from '../../Data/button.data.json';
+
+let buttonsPage: ButtonsPage;
+let actions: Actions;
+
+Before(async function() {
+  buttonsPage = new ButtonsPage(this.page);
+  actions = new Actions(this.page);
+});
+
+Given('the user navigates to the all variants page', { timeout: 30000 }, async function() {
+  console.log(`Navigating to: ${buttonTestData.allVariantsUrl}`);
+  await this.page.goto(buttonTestData.allVariantsUrl, { waitUntil: 'networkidle' });
+  console.log('Navigation complete');
+
+  console.log('Waiting for button to be visible');
+  await this.page.waitForSelector('button.d-button', { state: 'visible', timeout: 20000 });
+  console.log('Button is visible');
+
+  await this.page.waitForTimeout(2000);
+  console.log('Additional wait complete');
+});
+
+Then('the primary button should be displayed', async function() {
+  await expect(buttonsPage.primaryButton).toBeVisible({ timeout: 10000 });
+});
+
+Then('the secondary button should be displayed', async function() {
+  await expect(buttonsPage.secondaryButton).toBeVisible({ timeout: 10000 });
+});
+
+Then('a visual snapshot is taken for comparison', async function() {
+  // Assuming you have Percy set up in your CustomWorld
+  await this.percySnapshot('All Variants Button Page');
+});
+*/
+
+/*import { Given, Then, Before, After } from '@cucumber/cucumber';
+import { expect, chromium, Browser, Page } from '@playwright/test';
+import { ButtonsPage } from './ButtonPage';
+import { Actions } from '../../Utils/Actions';
+import buttonTestData from '../../Data/button.data.json';
+
+let browser: Browser;
+let page: Page;
+let buttonsPage: ButtonsPage;
+let actions: Actions;
+
+// Add these Before and After hooks
+Before(async function() {
+  browser = await chromium.launch();
+  page = await browser.newPage();
+  this.page = page;
+});
+
+After(async function() {
+  await browser.close();
+});
+
+Given('the user navigates to the all variants page', async function() {
+  buttonsPage = new ButtonsPage(this.page);
+  actions = new Actions(this.page);
+  await this.page.goto(buttonTestData.allVariantsUrl);
+  //
+
+});
+
+Then('the primary button should be displayed', async function() {
+  expect(await actions.isVisible(buttonsPage.primaryButton)).toBeTruthy();
+});
+
+Then('the secondary button should be displayed', async function() {
+  expect(await actions.isVisible(buttonsPage.secondaryButton)).toBeTruthy();
+});
+
+Then('a visual snapshot is taken for comparison', async function() {
+  await this.percySnapshot('All Variants Button Page');
+});
+
+*/
+
+/*import { Given, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { ButtonsPage } from './ButtonPage';
 import { Actions } from '../../Utils/Actions';
@@ -30,7 +159,7 @@ Then('a visual snapshot is taken for comparison', async function() {
   await this.percySnapshot('All Variants Button Page');
 });
 
-
+*/
 
 /*
 import { Given, Then, After } from '@cucumber/cucumber';

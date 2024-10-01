@@ -8,6 +8,7 @@ export class Actions {
   }
 
   // Method to check if an element is visible
+  // handles string also
   async isVisible(locator: Locator | string): Promise<boolean> {
     // Check if locator is of type string or Locator and then act accordingly
     if (typeof locator === 'string') {
