@@ -24,8 +24,11 @@ export const config: PlaywrightTestConfig = {
   ],
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
-    ['json', { outputFile: 'playwright-report/test-results.json' }]
-  ],
+    ['json', { outputFile: 'playwright-report/test-results.json' }],
+    ['allure-playwright'],
+    ['json', { outputFile: 'allure-results/cucumber-report.json' }]
+  ]
+  
 };
 export default config;
 

@@ -7,15 +7,15 @@
     "@playwright/test": "^1.47.2",
     "@types/node": "^22.5.4",
     "allure-commandline": "^2.30.0",
-    "allure-cucumberjs": "^3.0.3",
-    "allure-playwright": "^3.0.1",
+    "allure-cucumberjs": "^3.0.4",
+    "allure-playwright": "^3.0.4",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.2"
   },
- "scripts": {
+  "scripts": {
     "test": "cucumber-js",
     "test:chrome": "BROWSER=chromium npm run test",
     "test:firefox": "BROWSER=firefox npm run test",
@@ -27,6 +27,6 @@
     "report:html": "open cucumber-report.html",
     "test:all-parallel": "npm-run-all --parallel test:chrome test:firefox test:safari test:mobile-chrome test:mobile-safari",
     "report:playwright": "npx playwright show-report"
-    
+
   }
 }

@@ -10,11 +10,13 @@ module.exports = {
      ],
       requireModule: ['ts-node/register'],
       format: [
-        'progress-bar',
-       // ['allure-cucumberjs', {outputDir: 'allure-results'}],
+        //'progress-bar',
+        ["allure-cucumberjs/reporter"],
+       // 'json:allure-results/cucumber-report.json', // Ensures Allure JSON results are generated
         'html:cucumber-report.html'
       ],
       formatOptions: {
+        resultsDir: "allure-results",
         snippetInterface: 'async-await'
       },
       worldParameters: {
@@ -27,4 +29,4 @@ module.exports = {
         }
       }
     }
- };
+};

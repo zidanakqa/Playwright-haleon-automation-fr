@@ -22,18 +22,10 @@ Before(async function(this: CustomWorld) {
 After(async function(this: CustomWorld) {
   await this.close();
 });
+// remove after put them in configs
 
 Given('the user navigates to the all variants page', { timeout: 30000 }, async function(this: CustomWorld) {
-  console.log(`Navigating to: ${buttonTestData.allVariantsUrl}`);
   await this.page.goto(buttonTestData.allVariantsUrl, { waitUntil: 'networkidle' });
-  console.log('Navigation complete');
-
-  console.log('Waiting for button to be visible');
-  await this.page.waitForSelector('button.d-button', { state: 'visible', timeout: 20000 });
-  console.log('Button is visible');
-
-  await this.page.waitForTimeout(2000);
-  console.log('Additional wait complete');
 });
 
 Then('the primary button should be displayed', async function(this: CustomWorld) {
@@ -45,10 +37,12 @@ Then('the secondary button should be displayed', async function(this: CustomWorl
 });
 
 Then('a visual snapshot is taken for comparison', async function(this: CustomWorld) {
-  console.log('Taking Percy snapshot');
   await percySnapshot(this.page, 'All Variants Button Page');
-  console.log('Percy snapshot taken');
 });
+
+
+
+
 //Then('a visual snapshot is taken for comparison', async function(this: CustomWorld) {
  // await this.percySnapshot('All Variants Button Page');
 //});
