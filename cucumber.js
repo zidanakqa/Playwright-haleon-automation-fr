@@ -1,3 +1,5 @@
+const os = require("node:os");
+const process = require("node:process");
 const { devices } = require('@playwright/test');
 
 module.exports = {
@@ -5,8 +7,7 @@ module.exports = {
       paths: ['Test Scripts/Features/**/*.feature'],
       require: [
         'Test Scripts/**/*.ts',
-        'Utils/World.ts',
-        'cucumber-playwright.js'
+        'Utils/Browsers.ts',
      ],
       requireModule: ['ts-node/register'],
       format: [
@@ -16,9 +17,26 @@ module.exports = {
         'html:cucumber-report.html'
       ],
       formatOptions: {
-        resultsDir: "allure-results",
-        snippetInterface: 'async-await'
+        resultsDir:"TestResults/Allure/allure-results",
+        snippetInterface: 'async-await',
+        labels: [
+          {
+            pattern: [/@epic:(.*)/],
+            name: "epic",
+          },
+          {
+            pattern: [/@severity:(.*)/],
+            name: "severity",
+          },
+        ],
+        environmentInfo: {
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        },
       },
+      
       worldParameters: {
         browserOptions: {
           chromium: devices['Desktop Chrome'],

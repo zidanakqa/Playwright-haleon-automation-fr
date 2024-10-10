@@ -1,8 +1,8 @@
-import { setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
+import { setWorldConstructor, World, IWorldOptions, After } from '@cucumber/cucumber';
 import { chromium, firefox, webkit, Browser, BrowserContext, Page, devices } from '@playwright/test';
 import { config } from '../Config/playwright.config';
 
-export class CustomWorld extends World {
+export class BrowsersWorld extends World {
   browser!: Browser;
   context!: BrowserContext;
   page!: Page;
@@ -22,11 +22,9 @@ export class CustomWorld extends World {
     switch (browserType) {
       case 'firefox':
         this.browser = await firefox.launch(browserOptions);
-        this.context = await this.browser.newContext(browserOptions);
         break;
       case 'webkit':
         this.browser = await webkit.launch(browserOptions);
-        this.context = await this.browser.newContext(browserOptions);
         break;
       case 'mobile-chrome':
         this.browser = await chromium.launch(browserOptions);
@@ -44,9 +42,9 @@ export class CustomWorld extends World {
         break;
       default: // chromium
         this.browser = await chromium.launch(browserOptions);
-        this.context = await this.browser.newContext(browserOptions);
     }
 
+    this.context = await this.browser.newContext(browserOptions);
     this.page = await this.context.newPage();
   }
 
@@ -54,8 +52,11 @@ export class CustomWorld extends World {
     await this.context?.close();
     await this.browser?.close();
   }
-
-  
 }
 
-setWorldConstructor(CustomWorld);
+// Global After hook to handle cleanup after each scenario
+After(async function() {
+  await this.close(); // Calls the close method from BrowsersWorld
+});
+
+setWorldConstructor(BrowsersWorld);
