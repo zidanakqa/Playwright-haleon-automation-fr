@@ -1,6 +1,11 @@
 
   {
-    "allVariantsUrl": "https://lon-haleon-s4d-poc-ui.vercel.app/iframe.html?args=&id=atoms-button--all-variants&viewMode=story",
+    "allVariantsUrl": "https://s4d.eip.dev.haleon.com/iframe.html?args=&globals=theme:base;versionSelector.enabled:!false&version=branch:feat-button-ali&id=atoms-button--all-variants",
+    "allVariantsUrlT2": "https://s4d.eip.dev.haleon.com/iframe.html?args=&globals=theme:base-dark;versionSelector.enabled:!false&version=branch:feat-button-ali&id=atoms-button--all-variants",
+    "allVariantsUrlT3": "https://s4d.eip.dev.haleon.com/iframe.html?args=&globals=theme:centrum;versionSelector.enabled:!false&version=branch:feat-button-ali&id=atoms-button--all-variants&viewMode=story",
+    "allVariantsUrlT4": "https://s4d.eip.dev.haleon.com/iframe.html?args=&globals=theme:centrum-dark;versionSelector.enabled:!false&version=branch:feat-button-ali&id=atoms-button--all-variants",
+    "allVariantsUrlT5": "https://s4d.eip.dev.haleon.com/iframe.html?args=&globals=theme:voltaren;versionSelector.enabled:!false&version=branch:feat-button-ali&id=atoms-button--all-variants",
+    "allVariantsUrlT6": "https://s4d.eip.dev.haleon.com/iframe.html?args=&globals=theme:voltaren-dark;versionSelector.enabled:!false&version=branch:feat-button-ali&id=atoms-button--all-variants",
     "specialVariantUrl": "https://lon-haleon-s4d-poc-ui.vercel.app/iframe.html?args=label:zidan;disabled:!false;fullWidth:!true;showText:!true&id=atoms-button--basic&viewMode=story"
   }
   

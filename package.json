@@ -24,9 +24,7 @@
     "test:mobile-safari": "BROWSER=mobile-safari npm run test",
     "test:all": "npm run test:chrome && npm run test:firefox && npm run test:safari && npm run test:mobile-chrome && npm run test:mobile-safari",
     "test:all-parallel": "npm-run-all --parallel test:chrome test:firefox test:safari test:mobile-chrome test:mobile-safari",
-    
     "test:chrome:percy": "cross-env BROWSER=chromium npx percy exec --config=Config/.percy.json -- cucumber-js && allure generate TestResults/Allure/allure-results --clean -o TestResults/Allure/allure-report && allure open TestResults/Allure/allure-report",
-    
     "test:allure": "cucumber-js && allure generate TestResults/Allure/allure-results --clean -o TestResults/Allure/allure-report && allure open TestResults/Allure/allure-report",
     "report:html": "open cucumber-report.html",
     "report:playwright": "npx playwright show-report"

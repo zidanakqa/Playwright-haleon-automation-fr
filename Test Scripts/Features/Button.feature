@@ -1,11 +1,19 @@
 Feature: Button Component
 
-  Scenario: Verify primary and secondary buttons on all variants page
-    Given the user navigates to the all variants page
+  Scenario Outline: Verify primary and secondary buttons on all variants page for different themes
+    Given the user navigates to the all variants page for "<theme>"
     Then the primary button should be displayed
     And the secondary button should be displayed
-      And a visual snapshot is taken for comparison
+    And a visual snapshot is taken for comparison with name "<theme>"
 
+    Examples:
+      | theme         |
+      | base          |
+      | base-dark     |
+      | centrum       |
+      | centrum-dark  |
+      | voltaren      |
+      | voltaren-dark |
 
   #Scenario: Verify special variant button
     #Given the user navigates to the special variant page
