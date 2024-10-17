@@ -11,23 +11,53 @@ export class ButtonsPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.primaryButton = page.locator('button.d-button-kind__primary:not(.disabled)').first();
-    this.secondaryButton = page.locator('button.d-button-kind__secondary:not(.disabled)').first();
-    this.tertiaryButton = page.locator('button.d-button-kind__tertiary:not(.disabled)').first();
-    this.primaryDisabledButton = page.locator('button.d-button-kind__primary.disabled').first();
-    this.secondaryDisabledButton = page.locator('button.d-button-kind__secondary.disabled').first();
-    this.tertiaryDisabledButton = page.locator('button.d-button-kind__tertiary.disabled').first();
+    this.primaryButton = this.getButton('primary', { size: 'default', flex: 'hug' });
+    this.secondaryButton = this.getButton('secondary', { size: 'default', flex: 'hug' });
+    this.tertiaryButton = this.getButton('tertiary', { size: 'default', flex: 'hug' });
+    this.primaryDisabledButton = this.getButton('primary', { disabled: true, size: 'default', flex: 'hug' });
+    this.secondaryDisabledButton = this.getButton('secondary', { disabled: true, size: 'default', flex: 'hug' });
+    this.tertiaryDisabledButton = this.getButton('tertiary', { disabled: true, size: 'default', flex: 'hug' });
   }
 
-  async getPrimaryButtonWithText(text: string): Promise<Locator> {
-    return this.page.locator(`button.d-button-kind__primary:has-text("${text}")`).first();
+  private getButton(kind: 'primary' | 'secondary' | 'tertiary', options: {
+    disabled?: boolean,
+    size?: 'default' | 'small',
+    flex?: 'hug' | 'stretch',
+    iconPosition?: 'left' | 'right' | 'none',
+    text?: string
+  } = {}): Locator {
+    let selector = `button.d-button-kind__${kind}`;
+    
+    if (options.disabled) {
+      selector += '.disabled';
+    } else {
+      selector += ':not(.disabled)';
+    }
+
+    if (options.size) {
+      selector += `.d-button-size__${options.size}`;
+    }
+
+    if (options.flex) {
+      selector += `.d-button-flex__${options.flex}`;
+    }
+
+    if (options.iconPosition && options.iconPosition !== 'none') {
+      selector += `.d-button-icon-primary-inline.d-button-icon-${options.iconPosition}`;
+    }
+
+    if (options.text) {
+      selector += `:has-text("${options.text}")`;
+    }
+
+    return this.page.locator(selector).first();
   }
 
-  async getSecondaryButtonWithText(text: string): Promise<Locator> {
-    return this.page.locator(`button.d-button-kind__secondary:has-text("${text}")`).first();
+  getButtonWithText(kind: 'primary' | 'secondary' | 'tertiary', text: string): Locator {
+    return this.getButton(kind, { text: text });
   }
 
-  async getTertiaryButtonWithText(text: string): Promise<Locator> {
-    return this.page.locator(`button.d-button-kind__tertiary:has-text("${text}")`).first();
+  getAllButtons(): Locator {
+    return this.page.locator('button.d-button');
   }
 }

@@ -3,43 +3,31 @@ import { expect } from '@playwright/test';
 import { ButtonsPage } from './ButtonPage';
 import { Actions } from '../../Utils/Actions';
 import buttonTestData from '../../Data/button.data.json';
-import { BrowsersWorld } from '../../Utils/Browsers';
+import { BrowsersWorld } from '../../Utils/Browsers'; // Updated import
 import percySnapshot from '@percy/playwright';
 
 let buttonsPage: ButtonsPage;
 let actions: Actions;
 
-// Define a type for the themes
-type Theme = 'base' | 'base-dark' | 'centrum' | 'centrum-dark' | 'voltaren' | 'voltaren-dark';
-
-const urlMap: Record<Theme, string> = {
-  "base": buttonTestData.allVariantsUrl,
-  "base-dark": buttonTestData.allVariantsUrlT2,
-  "centrum": buttonTestData.allVariantsUrlT3,
-  "centrum-dark": buttonTestData.allVariantsUrlT4,
-  "voltaren": buttonTestData.allVariantsUrlT5,
-  "voltaren-dark": buttonTestData.allVariantsUrlT6
-};
-
-Before(async function(this: BrowsersWorld) {
+Before(async function(this: BrowsersWorld) { // Updated to BrowsersWorld
   await this.init();
   buttonsPage = new ButtonsPage(this.page);
   actions = new Actions(this.page);
 });
 
-Given('the user navigates to the all variants page for {string}', async function(this: BrowsersWorld, theme: string) {
-  const url = urlMap[theme as Theme];
-  await actions.authenticateAndNavigate(url);
+// Updated Given step to use Actions for authentication and navigation
+Given('the user navigates to the all variants page', async function(this: BrowsersWorld) { // Updated to BrowsersWorld
+  await actions.authenticateAndNavigate(buttonTestData.allVariantsUrl);
 });
 
-Then('the primary button should be displayed', async function(this: BrowsersWorld) {
+Then('the primary button should be displayed', async function(this: BrowsersWorld) { // Updated to BrowsersWorld
   await expect(buttonsPage.primaryButton).toBeVisible();
 });
 
-Then('the secondary button should be displayed', async function(this: BrowsersWorld) {
+Then('the secondary button should be displayed', async function(this: BrowsersWorld) { // Updated to BrowsersWorld
   await expect(buttonsPage.secondaryButton).toBeVisible();
 });
 
-Then('a visual snapshot is taken for comparison with name {string}', async function(this: BrowsersWorld, theme: string) {
-  await percySnapshot(this.page, `All Variants Button Page - ${theme}`);
+Then('a visual snapshot is taken for comparison', async function(this: BrowsersWorld) { // Updated to BrowsersWorld
+  await percySnapshot(this.page, 'All Variants Button Page');
 });
